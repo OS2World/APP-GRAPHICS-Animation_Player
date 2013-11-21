@@ -1,0 +1,71 @@
+//////////////////////////////////////////////////////////////////////////////
+// This is the resource file for the PMFLIC demo program.
+//
+// Copyright 1991 - Voyager Technologies, Inc.
+//////////////////////////////////////////////////////////////////////////////
+
+#define INCL_PM
+
+#include <os2.h>
+
+#include <pmflic.h>
+
+#include <fli_ex.h>
+
+
+//
+// Icon used by example
+//
+ICON	ID_FLIC   LOADONCALL MOVEABLE DISCARDABLE PMFLIC.ico
+RESOURCE RT_FLIC ID_VTI_FLIC VTI.FLI
+
+//
+// Simple menu
+//
+MENU	ID_FLIC   LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+  SUBMENU "~File",		  0
+  BEGIN
+    MENUITEM "A~bout...\tCtrl+A",	 IDM_ABOUT
+    MENUITEM "E~xit\tAlt+F4",		 SC_CLOSE,    MIS_SYSCOMMAND
+  END
+END
+
+//
+// About dialog box
+//
+DLGTEMPLATE IDM_ABOUT LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+  FRAME "",IDM_ABOUT,104,41,217,142,,FCF_DLGBORDER
+  BEGIN
+      CONTROL "Animation Player - 1.00", ID_NULL, 3, 132, 211, 9, WC_STATIC,
+              SS_TEXT | DT_CENTER | DT_TOP | WS_VISIBLE
+	PRESPARAMS PP_FONTNAMESIZE,"14.Tms Rmn"
+	PRESPARAMS PP_FOREGROUNDCOLORINDEX,CLR_DARKGREEN
+      CONTROL "Copyright 1991 By", ID_NULL, 3, 122, 211, 8, WC_STATIC,
+	      SS_TEXT | DT_CENTER | DT_TOP | WS_VISIBLE
+      //
+      // This control statement demostrates how easily an animation can be
+      // displayed within a dialog box
+      //
+      CONTROL ID_VTI_FLICS, ID_NULL, 3, 55, 211, 64, FLICBOX_CLASS,
+	      WS_VISIBLE
+
+      CONTROL "3131 Piedmont Road, Suite 200", ID_NULL, 3, 43, 211,
+              10, WC_STATIC, SS_TEXT | DT_CENTER | DT_TOP | WS_VISIBLE
+	PRESPARAMS PP_FONTNAMESIZE,"12.Helv"
+      CONTROL "Atlanta, Georgia 30305", ID_NULL, 3, 32, 211, 10,
+              WC_STATIC, SS_TEXT | DT_CENTER | DT_TOP | WS_VISIBLE
+	PRESPARAMS PP_FONTNAMESIZE,"12.Helv"
+      CONTROL "(404) 231-6057  FAX (404) 261-4235", ID_NULL, 3, 21,
+              211, 10, WC_STATIC, SS_TEXT | DT_CENTER | DT_TOP | WS_VISIBLE
+	PRESPARAMS PP_FONTNAMESIZE,"12.Helv"
+      CONTROL "OK", DID_OK, 90, 4, 38, 12, WC_BUTTON, BS_PUSHBUTTON |
+              BS_DEFAULT | WS_TABSTOP | WS_VISIBLE
+  END
+END
+
+ACCELTABLE ID_FLIC
+{
+    "^A", IDM_ABOUT
+}
